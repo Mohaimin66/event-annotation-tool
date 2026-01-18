@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Annotation Tool</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Event Annotation Tool</h1>
+            <div class="annotator-select">
+                <label for="annotator">Annotator:</label>
+                <select id="annotator"></select>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-section">
+            <div class="progress-text">
+                Progress: <span id="progress-completed">0</span>/<span id="progress-total">0</span>
+                (<span id="progress-percent">0</span>%)
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sentence Display -->
+            <div class="sentence-section">
+                <div class="sentence-header">
+                    Sentence <span id="current-index">1</span> of <span id="total-items">0</span>
+                </div>
+                <div class="sentence-display" id="sentence-display">
+                    <!-- Tokens will be rendered here -->
+                </div>
+                <div class="selection-hint">
+                    Click words to select trigger. <span id="selected-trigger-text">Selected: none</span>
+                </div>
+            </div>
+
+            <!-- Model Predictions -->
+            <div class="predictions-section">
+                <div class="section-title">Model's Predictions (click to select):</div>
+                <div class="prediction-cards" id="prediction-cards">
+                    <!-- Prediction cards will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Definition Display -->
+            <div class="definition-section" id="definition-section" style="display: none;">
+                <div class="definition-content" id="definition-content"></div>
+            </div>
+
+            <!-- Search Section -->
+            <div class="search-section">
+                <input type="text" id="search-input" placeholder="Search all event types..." autocomplete="off">
+                <div class="search-results" id="search-results" style="display: none;">
+                    <!-- Search results will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Not in List Checkbox -->
+            <div class="not-in-list-section">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="not-in-list">
+                    <span>Not in event list</span>
+                </label>
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation-section">
+                <button class="nav-btn" id="prev-btn">&larr; Prev</button>
+                <div class="page-info">
+                    Page <span id="current-page">1</span> of <span id="total-pages">1</span>
+                    <input type="number" id="goto-page" min="1" placeholder="Go to">
+                    <button class="goto-btn" id="goto-btn">Go</button>
+                </div>
+                <button class="nav-btn" id="next-btn">Next &rarr;</button>
+            </div>
+        </main>
+
+        <!-- Footer with Shortcuts -->
+        <footer class="footer">
+            <div class="shortcuts">
+                <span><kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd> select event</span>
+                <span><kbd>&larr;</kbd>/<kbd>&rarr;</kbd> prev/next</span>
+                <span><kbd>Space</kbd> toggle definition</span>
+                <span><kbd>Ctrl+S</kbd> save</span>
+                <span><kbd>N</kbd> toggle "not in list"</span>
+                <span><kbd>/</kbd> search</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal" id="search-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Search Event Types</h2>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <input type="text" id="modal-search-input" placeholder="Type to search..." autocomplete="off">
+            <div class="modal-results" id="modal-results">
+                <!-- Modal search results -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
