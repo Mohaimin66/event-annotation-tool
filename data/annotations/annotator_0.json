@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "sentence": "He went to the jungle and killed a horse.",
+    "tokens": [
+      "He",
+      "went",
+      "to",
+      "the",
+      "jungle",
+      "and",
+      "killed",
+      "a",
+      "horse",
+      "."
+    ],
+    "model_prediction": {
+      "top_event_types": [
+        "hunt",
+        "kill",
+        "attack"
+      ],
+      "trigger_indices": [
+        6
+      ]
+    },
+    "annotation": {
+      "trigger_indices": [
+        6
+      ],
+      "event_type": "attack",
+      "not_in_list": false,
+      "annotated_at": "2026-01-18T23:43:11.365891Z"
+    }
+  },
+  {
+    "id": 4,
+    "sentence": "The company hired twenty new engineers this quarter.",
+    "tokens": [
+      "The",
+      "company",
+      "hired",
+      "twenty",
+      "new",
+      "engineers",
+      "this",
+      "quarter",
+      "."
+    ],
+    "model_prediction": {
+      "top_event_types": [
+        "hire",
+        "acquire",
+        "transfer"
+      ],
+      "trigger_indices": [
+        2
+      ]
+    },
+    "annotation": {
+      "trigger_indices": [
+        2
+      ],
+      "event_type": "kill",
+      "not_in_list": false,
+      "annotated_at": "2026-01-18T23:43:12.699199Z"
+    }
+  },
+  {
+    "id": 7,
+    "sentence": "The soldier died in combat overseas.",
+    "tokens": [
+      "The",
+      "soldier",
+      "died",
+      "in",
+      "combat",
+      "overseas",
+      "."
+    ],
+    "model_prediction": {
+      "top_event_types": [
+        "die",
+        "kill",
+        "injure"
+      ],
+      "trigger_indices": [
+        2
+      ]
+    },
+    "annotation": {
+      "trigger_indices": [
+        2
+      ],
+      "event_type": null,
+      "not_in_list": false,
+      "annotated_at": "2026-01-18T23:43:05.915962Z"
+    }
+  }
+]
