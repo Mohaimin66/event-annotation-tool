@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "sentence": "He went to the jungle and killed a horse.",
+    "tokens": ["He", "went", "to", "the", "jungle", "and", "killed", "a", "horse", "."],
+    "model_prediction": {
+      "trigger_indices": [6],
+      "top_event_types": ["hunt", "kill", "attack"]
+    }
+  },
+  {
+    "id": 2,
+    "sentence": "The police arrested three suspects yesterday.",
+    "tokens": ["The", "police", "arrested", "three", "suspects", "yesterday", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["arrest", "convict", "attack"]
+    }
+  },
+  {
+    "id": 3,
+    "sentence": "Sarah and John got married in a small ceremony.",
+    "tokens": ["Sarah", "and", "John", "got", "married", "in", "a", "small", "ceremony", "."],
+    "model_prediction": {
+      "trigger_indices": [4],
+      "top_event_types": ["marry", "meet", "transfer"]
+    }
+  },
+  {
+    "id": 4,
+    "sentence": "The company hired twenty new engineers this quarter.",
+    "tokens": ["The", "company", "hired", "twenty", "new", "engineers", "this", "quarter", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["hire", "acquire", "transfer"]
+    }
+  },
+  {
+    "id": 5,
+    "sentence": "The CEO resigned after the scandal broke.",
+    "tokens": ["The", "CEO", "resigned", "after", "the", "scandal", "broke", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["resign", "fire", "die"]
+    }
+  },
+  {
+    "id": 6,
+    "sentence": "Protesters demonstrated against the new policy.",
+    "tokens": ["Protesters", "demonstrated", "against", "the", "new", "policy", "."],
+    "model_prediction": {
+      "trigger_indices": [1],
+      "top_event_types": ["demonstrate", "attack", "meet"]
+    }
+  },
+  {
+    "id": 7,
+    "sentence": "The soldier died in combat overseas.",
+    "tokens": ["The", "soldier", "died", "in", "combat", "overseas", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["die", "kill", "injure"]
+    }
+  },
+  {
+    "id": 8,
+    "sentence": "She gave birth to twins last night.",
+    "tokens": ["She", "gave", "birth", "to", "twins", "last", "night", "."],
+    "model_prediction": {
+      "trigger_indices": [1, 2],
+      "top_event_types": ["birth", "die", "transfer"]
+    }
+  },
+  {
+    "id": 9,
+    "sentence": "The jury convicted him of fraud.",
+    "tokens": ["The", "jury", "convicted", "him", "of", "fraud", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["convict", "arrest", "sue"]
+    }
+  },
+  {
+    "id": 10,
+    "sentence": "Two companies merged to form the largest retailer.",
+    "tokens": ["Two", "companies", "merged", "to", "form", "the", "largest", "retailer", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["merge", "acquire", "transfer"]
+    }
+  },
+  {
+    "id": 11,
+    "sentence": "The attacker injured five people before fleeing.",
+    "tokens": ["The", "attacker", "injured", "five", "people", "before", "fleeing", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["injure", "attack", "kill"]
+    }
+  },
+  {
+    "id": 12,
+    "sentence": "They elected her as the new president.",
+    "tokens": ["They", "elected", "her", "as", "the", "new", "president", "."],
+    "model_prediction": {
+      "trigger_indices": [1],
+      "top_event_types": ["elect", "hire", "transfer"]
+    }
+  },
+  {
+    "id": 13,
+    "sentence": "The couple divorced after ten years of marriage.",
+    "tokens": ["The", "couple", "divorced", "after", "ten", "years", "of", "marriage", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["divorce", "marry", "sue"]
+    }
+  },
+  {
+    "id": 14,
+    "sentence": "The corporation acquired a smaller competitor.",
+    "tokens": ["The", "corporation", "acquired", "a", "smaller", "competitor", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["acquire", "merge", "transfer"]
+    }
+  },
+  {
+    "id": 15,
+    "sentence": "She was fired for misconduct.",
+    "tokens": ["She", "was", "fired", "for", "misconduct", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["fire", "resign", "convict"]
+    }
+  },
+  {
+    "id": 16,
+    "sentence": "The family sued the hospital for negligence.",
+    "tokens": ["The", "family", "sued", "the", "hospital", "for", "negligence", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["sue", "convict", "attack"]
+    }
+  },
+  {
+    "id": 17,
+    "sentence": "World leaders met at the summit in Geneva.",
+    "tokens": ["World", "leaders", "met", "at", "the", "summit", "in", "Geneva", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["meet", "demonstrate", "elect"]
+    }
+  },
+  {
+    "id": 18,
+    "sentence": "The hunter killed a deer in the forest.",
+    "tokens": ["The", "hunter", "killed", "a", "deer", "in", "the", "forest", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["kill", "hunt", "attack"]
+    }
+  },
+  {
+    "id": 19,
+    "sentence": "He was transferred to the London office.",
+    "tokens": ["He", "was", "transferred", "to", "the", "London", "office", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["transfer", "hire", "fire"]
+    }
+  },
+  {
+    "id": 20,
+    "sentence": "The rebels attacked the military base at dawn.",
+    "tokens": ["The", "rebels", "attacked", "the", "military", "base", "at", "dawn", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["attack", "kill", "injure"]
+    }
+  },
+  {
+    "id": 21,
+    "sentence": "A baby was born during the flight.",
+    "tokens": ["A", "baby", "was", "born", "during", "the", "flight", "."],
+    "model_prediction": {
+      "trigger_indices": [3],
+      "top_event_types": ["birth", "die", "transfer"]
+    }
+  },
+  {
+    "id": 22,
+    "sentence": "The manager hired her on the spot.",
+    "tokens": ["The", "manager", "hired", "her", "on", "the", "spot", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["hire", "meet", "elect"]
+    }
+  },
+  {
+    "id": 23,
+    "sentence": "Three soldiers were injured in the explosion.",
+    "tokens": ["Three", "soldiers", "were", "injured", "in", "the", "explosion", "."],
+    "model_prediction": {
+      "trigger_indices": [3],
+      "top_event_types": ["injure", "die", "attack"]
+    }
+  },
+  {
+    "id": 24,
+    "sentence": "The senator resigned amid corruption charges.",
+    "tokens": ["The", "senator", "resigned", "amid", "corruption", "charges", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["resign", "convict", "arrest"]
+    }
+  },
+  {
+    "id": 25,
+    "sentence": "Thousands demonstrated in the capital city.",
+    "tokens": ["Thousands", "demonstrated", "in", "the", "capital", "city", "."],
+    "model_prediction": {
+      "trigger_indices": [1],
+      "top_event_types": ["demonstrate", "meet", "attack"]
+    }
+  },
+  {
+    "id": 26,
+    "sentence": "The court convicted all defendants of bribery.",
+    "tokens": ["The", "court", "convicted", "all", "defendants", "of", "bribery", "."],
+    "model_prediction": {
+      "trigger_indices": [2],
+      "top_event_types": ["convict", "arrest", "sue"]
+    }
+  },
+  {
+    "id": 27,
+    "sentence": "They attacked the convoy with rockets.",
+    "tokens": ["They", "attacked", "the", "convoy", "with", "rockets", "."],
+    "model_prediction": {
+      "trigger_indices": [1],
+      "top_event_types": ["attack", "kill", "injure"]
+    }
+  },
+  {
+    "id": 28,
+    "sentence": "The startup was acquired for two billion dollars.",
+    "tokens": ["The", "startup", "was", "acquired", "for", "two", "billion", "dollars", "."],
+    "model_prediction": {
+      "trigger_indices": [3],
+      "top_event_types": ["acquire", "merge", "transfer"]
+    }
+  },
+  {
+    "id": 29,
+    "sentence": "Police arrested the suspect at his home.",
+    "tokens": ["Police", "arrested", "the", "suspect", "at", "his", "home", "."],
+    "model_prediction": {
+      "trigger_indices": [1],
+      "top_event_types": ["arrest", "attack", "convict"]
+    }
+  },
+  {
+    "id": 30,
+    "sentence": "The employee was fired without notice.",
+    "tokens": ["The", "employee", "was", "fired", "without", "notice", "."],
+    "model_prediction": {
+      "trigger_indices": [3],
+      "top_event_types": ["fire", "resign", "sue"]
+    }
+  }
+]
