@@ -1,0 +1,102 @@
+[
+  {
+    "id": "kill",
+    "name": "Kill",
+    "description": "An event where one entity causes the death of another living being intentionally or unintentionally."
+  },
+  {
+    "id": "hunt",
+    "name": "Hunt",
+    "description": "An event where an entity pursues and captures or kills animals for food, sport, or trade."
+  },
+  {
+    "id": "attack",
+    "name": "Attack",
+    "description": "An event where one entity aggressively acts against another with intent to harm or damage."
+  },
+  {
+    "id": "die",
+    "name": "Die",
+    "description": "An event where a living entity ceases to live, either naturally or due to external causes."
+  },
+  {
+    "id": "injure",
+    "name": "Injure",
+    "description": "An event where physical harm or damage is caused to a person or animal's body."
+  },
+  {
+    "id": "arrest",
+    "name": "Arrest",
+    "description": "An event where law enforcement takes a person into custody for suspected criminal activity."
+  },
+  {
+    "id": "convict",
+    "name": "Convict",
+    "description": "An event where a person is found guilty of a crime by a court of law."
+  },
+  {
+    "id": "sue",
+    "name": "Sue",
+    "description": "An event where one party initiates legal proceedings against another in a court of law."
+  },
+  {
+    "id": "marry",
+    "name": "Marry",
+    "description": "An event where two people enter into a legally or socially recognized union as partners."
+  },
+  {
+    "id": "divorce",
+    "name": "Divorce",
+    "description": "An event where a married couple legally dissolves their marriage."
+  },
+  {
+    "id": "birth",
+    "name": "Birth",
+    "description": "An event where a baby or young animal is born."
+  },
+  {
+    "id": "hire",
+    "name": "Hire",
+    "description": "An event where an organization employs a person to work for them."
+  },
+  {
+    "id": "fire",
+    "name": "Fire",
+    "description": "An event where an employer terminates an employee's position."
+  },
+  {
+    "id": "resign",
+    "name": "Resign",
+    "description": "An event where a person voluntarily leaves their job or position."
+  },
+  {
+    "id": "elect",
+    "name": "Elect",
+    "description": "An event where a person is chosen for a position through voting."
+  },
+  {
+    "id": "demonstrate",
+    "name": "Demonstrate",
+    "description": "An event where people gather publicly to show support for or opposition to something."
+  },
+  {
+    "id": "meet",
+    "name": "Meet",
+    "description": "An event where two or more people come together, either planned or by chance."
+  },
+  {
+    "id": "transfer",
+    "name": "Transfer",
+    "description": "An event where a person or asset moves from one place, organization, or owner to another."
+  },
+  {
+    "id": "acquire",
+    "name": "Acquire",
+    "description": "An event where an entity obtains possession or ownership of something."
+  },
+  {
+    "id": "merge",
+    "name": "Merge",
+    "description": "An event where two or more organizations combine to form a single entity."
+  }
+]
