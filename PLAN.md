@@ -70,12 +70,12 @@ A lightweight, localhost-hosted annotation UI for event extraction datasets. Ann
 - [x] Create Dockerfile
 - [x] Document data format and usage
 
-### Phase 7: Testing & Polish - IN PROGRESS
-- [ ] Test with sample data locally
-- [ ] Test multi-annotator splits
-- [ ] Test all keyboard shortcuts
-- [ ] Verify output JSON format
-- [ ] Push to GitHub
+### Phase 7: Testing & Polish - MOSTLY COMPLETE
+- [x] Test with sample data locally (API working)
+- [x] Test multi-annotator splits (10 items each for 3 annotators)
+- [ ] Test all keyboard shortcuts (manual browser test needed)
+- [ ] Verify output JSON format (manual test needed)
+- [x] Push to GitHub
 - [ ] Deploy to Hugging Face Spaces
 - [ ] Test remote access
 
