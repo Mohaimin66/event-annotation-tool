@@ -1,0 +1,5 @@
+{
+  "num_annotators": 3,
+  "items_per_page": 10,
+  "annotator_names": ["Alice", "Bob", "Charlie"]
+}
