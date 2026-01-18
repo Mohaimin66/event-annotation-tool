@@ -3,10 +3,13 @@ Event Extraction Annotation Tool - Flask Backend
 """
 import json
 import os
+import secrets
 from datetime import datetime
-from flask import Flask, render_template, jsonify, request
+from functools import wraps
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(32))
 
 # Determine base path for data files (supports Hugging Face Spaces persistent storage)
 DATA_DIR = os.environ.get('DATA_DIR', 'data')
@@ -90,24 +93,75 @@ def save_annotation(annotator_id, annotation_data):
     return True
 
 
+# Authentication
+def login_required(f):
+    """Decorator to require login for routes."""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        config = get_config()
+        # If no password set, allow access
+        if not config.get('password'):
+            return f(*args, **kwargs)
+        # Check if logged in
+        if not session.get('logged_in'):
+            if request.is_json:
+                return jsonify({'error': 'Unauthorized'}), 401
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 # Routes
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Login page."""
+    config = get_config()
+
+    # If no password set, redirect to main app
+    if not config.get('password'):
+        return redirect(url_for('index'))
+
+    error = None
+    if request.method == 'POST':
+        password = request.form.get('password', '')
+        if password == config.get('password'):
+            session['logged_in'] = True
+            return redirect(url_for('index'))
+        else:
+            error = 'Invalid password'
+
+    return render_template('login.html', error=error)
+
+
+@app.route('/logout')
+def logout():
+    """Logout and clear session."""
+    session.clear()
+    return redirect(url_for('login'))
+
+
 @app.route('/')
+@login_required
 def index():
     """Serve main UI."""
     return render_template('index.html')
 
 
 @app.route('/api/config')
+@login_required
 def api_config():
     """Get app configuration."""
     try:
         config = get_config()
-        return jsonify(config)
+        # Don't expose password to frontend
+        safe_config = {k: v for k, v in config.items() if k != 'password'}
+        return jsonify(safe_config)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 
 @app.route('/api/event-types')
+@login_required
 def api_event_types():
     """Get all event type definitions."""
     try:
@@ -118,6 +172,7 @@ def api_event_types():
 
 
 @app.route('/api/data/<int:annotator_id>')
+@login_required
 def api_data(annotator_id):
     """Get annotator's data split with any existing annotations."""
     try:
@@ -145,6 +200,7 @@ def api_data(annotator_id):
 
 
 @app.route('/api/annotate', methods=['POST'])
+@login_required
 def api_annotate():
     """Save an annotation."""
     try:
@@ -175,6 +231,7 @@ def api_annotate():
 
 
 @app.route('/api/progress/<int:annotator_id>')
+@login_required
 def api_progress(annotator_id):
     """Get annotation progress for an annotator."""
     try:
