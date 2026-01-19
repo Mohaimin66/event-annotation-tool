@@ -1,5 +1,6 @@
 /**
  * Event Annotation Tool - Frontend Logic
+ * Enhanced with IAA support, consecutive selection, and progress grid
  */
 
 // State
@@ -7,11 +8,13 @@ let config = {};
 let eventTypes = [];
 let eventTypesMap = {};
 let items = [];
+let allItems = []; // Store all items for filtering
 let currentIndex = 0;
 let currentAnnotatorId = 0;
 let selectedTriggerIndices = [];
 let selectedEventType = null;
 let notInList = false;
+let showUnannotatedOnly = false; // Filter toggle state
 
 // DOM Elements
 const annotatorSelect = document.getElementById("annotator");
@@ -88,7 +91,8 @@ async function loadAnnotatorData(annotatorId) {
   try {
     const res = await fetch(`/api/data/${annotatorId}`);
     const data = await res.json();
-    items = data.items;
+    allItems = data.items; // Store all items
+    applyFilter(); // Apply current filter
     currentIndex = 0;
 
     // Find first unannotated item
@@ -101,8 +105,38 @@ async function loadAnnotatorData(annotatorId) {
 
     renderCurrentItem();
     updateProgress();
+    renderProgressGrid();
   } catch (error) {
     console.error("Error loading annotator data:", error);
+  }
+}
+
+function applyFilter() {
+  if (showUnannotatedOnly) {
+    items = allItems.filter((item) => !item.annotation);
+  } else {
+    items = [...allItems];
+  }
+}
+
+function toggleFilter() {
+  showUnannotatedOnly = !showUnannotatedOnly;
+  const filterToggle = document.getElementById("filter-toggle");
+  if (filterToggle) {
+    filterToggle.checked = showUnannotatedOnly;
+  }
+  applyFilter();
+  currentIndex = 0;
+  renderCurrentItem();
+  updateFilterLabel();
+}
+
+function updateFilterLabel() {
+  const filterLabel = document.getElementById("filter-label");
+  if (filterLabel) {
+    filterLabel.textContent = showUnannotatedOnly
+      ? `Showing ${items.length} unannotated items`
+      : `Showing all ${items.length} items`;
   }
 }
 
@@ -157,6 +191,10 @@ function renderCurrentItem() {
   // Clear search
   searchInput.value = "";
   searchResults.style.display = "none";
+
+  // Update progress grid to show current item
+  renderProgressGrid();
+  updateFilterLabel();
 }
 
 function renderTokens(item) {
@@ -183,28 +221,36 @@ function renderTokens(item) {
 }
 
 function handleTokenClick(idx, shiftKey) {
-  if (shiftKey && selectedTriggerIndices.length > 0) {
-    // Range selection
-    const lastSelected =
-      selectedTriggerIndices[selectedTriggerIndices.length - 1];
-    const start = Math.min(lastSelected, idx);
-    const end = Math.max(lastSelected, idx);
-    for (let i = start; i <= end; i++) {
-      if (!selectedTriggerIndices.includes(i)) {
-        selectedTriggerIndices.push(i);
-      }
-    }
+  // Bug Fix #2: Consecutive word selection
+  // Click-to-extend behavior: clicking extends selection to create continuous range
+  // Click same single word to clear selection
+
+  if (selectedTriggerIndices.length === 0) {
+    // Start new selection
+    selectedTriggerIndices = [idx];
+  } else if (
+    selectedTriggerIndices.length === 1 &&
+    selectedTriggerIndices[0] === idx
+  ) {
+    // Click same word that's already selected alone - clear selection
+    selectedTriggerIndices = [];
   } else {
-    // Toggle selection
-    const existingIdx = selectedTriggerIndices.indexOf(idx);
-    if (existingIdx >= 0) {
-      selectedTriggerIndices.splice(existingIdx, 1);
-    } else {
-      selectedTriggerIndices.push(idx);
-    }
+    // Extend to create continuous range from current selection to clicked word
+    const currentStart = selectedTriggerIndices[0];
+    const currentEnd =
+      selectedTriggerIndices[selectedTriggerIndices.length - 1];
+
+    // Determine new range boundaries
+    const start = Math.min(currentStart, idx);
+    const end = Math.max(currentEnd, idx);
+
+    // Create continuous range
+    selectedTriggerIndices = Array.from(
+      { length: end - start + 1 },
+      (_, i) => start + i,
+    );
   }
 
-  selectedTriggerIndices.sort((a, b) => a - b);
   renderTokens(items[currentIndex]);
   updateSelectedTriggerText(items[currentIndex]);
 }
@@ -353,7 +399,13 @@ function renderModalResults(query) {
 
 // Save annotation
 async function saveCurrentAnnotation() {
-  if (items.length === 0) return;
+  if (items.length === 0) return false;
+
+  // Bug Fix #1: Only save when event_type is selected OR not_in_list is checked
+  if (!selectedEventType && !notInList) {
+    // Don't save incomplete annotations
+    return false;
+  }
 
   const item = items[currentIndex];
   const annotation = {
@@ -376,13 +428,27 @@ async function saveCurrentAnnotation() {
     if (res.ok) {
       // Update local state
       item.annotation = annotation;
+      // Also update allItems if filtering
+      const allItemsIdx = allItems.findIndex((i) => i.id === item.id);
+      if (allItemsIdx >= 0) {
+        allItems[allItemsIdx].annotation = annotation;
+      }
       updateProgress();
+      renderProgressGrid();
+      return true;
     } else {
       console.error("Failed to save annotation");
+      return false;
     }
   } catch (error) {
     console.error("Error saving annotation:", error);
+    return false;
   }
+}
+
+// Check if current annotation is valid (can be saved)
+function isValidAnnotation() {
+  return selectedEventType !== null || notInList;
 }
 
 async function updateProgress() {
@@ -396,6 +462,55 @@ async function updateProgress() {
     progressFill.style.width = `${progress.percentage}%`;
   } catch (error) {
     console.error("Error updating progress:", error);
+  }
+}
+
+// Render GitHub-style progress grid
+function renderProgressGrid() {
+  const gridContainer = document.getElementById("progress-grid");
+  if (!gridContainer) return;
+
+  gridContainer.innerHTML = "";
+
+  // Create cells for all items
+  allItems.forEach((item, idx) => {
+    const cell = document.createElement("div");
+    cell.className = "grid-cell";
+
+    if (item.annotation) {
+      cell.classList.add("done");
+    } else {
+      cell.classList.add("pending");
+    }
+
+    // Highlight current item
+    if (items[currentIndex] && item.id === items[currentIndex].id) {
+      cell.classList.add("current");
+    }
+
+    cell.title = `Item ${item.id}`;
+    cell.addEventListener("click", () => jumpToItem(item.id));
+    gridContainer.appendChild(cell);
+  });
+}
+
+// Jump to a specific item by ID
+function jumpToItem(itemId) {
+  const idx = items.findIndex((item) => item.id === itemId);
+  if (idx >= 0) {
+    goToItem(idx);
+  } else if (showUnannotatedOnly) {
+    // If filtering, turn off filter and try again
+    showUnannotatedOnly = false;
+    applyFilter();
+    const newIdx = items.findIndex((item) => item.id === itemId);
+    if (newIdx >= 0) {
+      currentIndex = newIdx;
+      renderCurrentItem();
+    }
+    const filterToggle = document.getElementById("filter-toggle");
+    if (filterToggle) filterToggle.checked = false;
+    updateFilterLabel();
   }
 }
 
