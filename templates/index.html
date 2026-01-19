@@ -29,10 +29,39 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
+
+            <!-- Progress Grid -->
+            <div class="progress-grid-section">
+                <div class="progress-grid-title">Click any cell to jump to that item:</div>
+                <div class="progress-grid" id="progress-grid"></div>
+                <div class="grid-legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #ffeaa7;"></div>
+                        <span>Pending</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #00b894;"></div>
+                        <span>Done</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #3498db;"></div>
+                        <span>Current</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Filter Toggle -->
+            <div class="filter-section">
+                <label class="filter-toggle-label">
+                    <input type="checkbox" id="filter-toggle" onchange="toggleFilter()">
+                    <span>Show unannotated only</span>
+                </label>
+                <span class="filter-info" id="filter-label">Showing all items</span>
+            </div>
+
             <!-- Sentence Display -->
             <div class="sentence-section">
                 <div class="sentence-header">
